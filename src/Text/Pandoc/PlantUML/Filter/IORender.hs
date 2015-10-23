@@ -15,9 +15,7 @@ instance ImageIO IO where
     (Just hIn, Just hOut, _, _) <- createProcess $ plantUmlProcess imageFileName
     hPutStr hIn source
     hClose hIn
-    --img <- hGetContents hOut
     withImageFile $ pipe hOut
-    --(\h -> hPut h img)
     hClose hOut
       where withImageFile = withBinaryFile (show imageFileName) WriteMode
   doesImageExist imageFileName = doesFileExist $ show imageFileName

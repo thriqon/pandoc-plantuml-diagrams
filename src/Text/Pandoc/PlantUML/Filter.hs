@@ -13,35 +13,20 @@ import Control.Monad
 
 import Text.Pandoc.PlantUML.Filter.Types
 import Text.Pandoc.PlantUML.Filter.FileNameGenerator
+import Text.Pandoc.PlantUML.Filter.Formats
+import Text.Pandoc.PlantUML.Filter.OutputBlock
 
 processBlocks :: ImageIO m => Maybe Format -> Block -> m Block
-processBlocks (Just format) (CodeBlock (id, ["uml"], keyValues) contents) = do
-  ensureRendered imageFileName contents
-  return $ Para [(Image altTag ((show imageFileName), "fig:")), (Str ("{#" ++ id ++ "}"))]
-    where
-      imageFileName = ImageFileName (fileNameForSource contents) (imageFormatTypeFor format)
-      altTag = case findAltText keyValues of
-                 Just f -> [Str f]
-                 Nothing -> []
-processBlocks _ x = return x
-
--- | The image file type to be used for the given output format.
--- EPS is used for latex outputs, as it provides lossless scalability
--- All other output formats use PNG for now.
-imageFormatTypeFor :: Format -> ImageFormat
-imageFormatTypeFor (Format "latex") =  "eps"
-imageFormatTypeFor _                =  "png"
-
--- | Finds the caption in an image, if present.
-findAltText :: [(String, String)] -> Maybe String
-findAltText = lookup "caption"
-
-altTag :: Attr -> [Inline]
-altTag (_, _, map) = case findAltText map of
-  Just f   -> [Str f]
-  Nothing  -> []
+processBlocks (Just format) block@(CodeBlock attr@(_, classes, _) contents)
+  | "uml" `elem` classes       = do
+    let imageFileName = ImageFileName (fileNameForSource contents) (imageFormatTypeFor format)
+    ensureRendered imageFileName contents
+    return $ resultBlock imageFileName attr
+  | otherwise                  = return block
+processBlocks _ x              = return x
 
 ensureRendered :: ImageIO m => ImageFileName -> DiagramSource -> m ()
-ensureRendered imageFileName source = do
-  exists <- doesImageExist imageFileName
-  when (not exists) $ renderImage imageFileName source
+ensureRendered imageFileName source = inCaseNotExists imageFileName $ renderImage imageFileName source
+
+inCaseNotExists :: ImageIO m => ImageFileName -> m () -> m ()
+inCaseNotExists fileName action = doesImageExist fileName >>= flip unless action
