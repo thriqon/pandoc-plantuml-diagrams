@@ -11,7 +11,7 @@ import System.Directory
 import Text.Pandoc.PlantUML.Filter.Types
 
 instance ImageIO IO where
-  renderImage imageFileName source = do
+  renderImage imageFileName (DiagramSource source) = do
     (Just hIn, Just hOut, _, _) <- createProcess $ plantUmlProcess imageFileName
     hPutStr hIn source
     hClose hIn

@@ -1,10 +1,20 @@
 
+-- | Module : Text.Pandoc.PlantUML.Filter.OutputBlock
+-- Renders an image file name and some attributes into a Pandoc
+-- block, like so:
+--
+-- @
+-- Para
+--   Image src=picture.jpg
+--   "{#fig:id}"
+-- @
 module Text.Pandoc.PlantUML.Filter.OutputBlock(resultBlock) where
 
 import Text.Pandoc.JSON
 import Text.Pandoc.PlantUML.Filter.Types
 import Data.Maybe
 
+-- | The result block, as specified in the module header.
 resultBlock :: ImageFileName -> Attr -> Block
 resultBlock imageFileName attr = Para $ map (\p -> p imageFileName attr) [imageTag, idTag]
 

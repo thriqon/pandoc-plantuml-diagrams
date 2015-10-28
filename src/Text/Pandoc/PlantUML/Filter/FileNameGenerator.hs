@@ -10,7 +10,7 @@ import Text.Pandoc.PlantUML.Filter.Types
 
 -- | Generates the Hash of a diagram source, and prefixes that.
 fileNameForSource :: DiagramSource -> ImageName
-fileNameForSource source = prefix ++ (hash source)
+fileNameForSource (DiagramSource source) = prefix ++ (hash source)
   where hash = showDigest . sha1 . fromString
 
 -- | The prefix to put before rendered images

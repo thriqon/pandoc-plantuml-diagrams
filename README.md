@@ -19,4 +19,18 @@ their homepage:
 Usage
 -----
 
+Declare code blocks in the source markdown like:
+
+    ```{#fig:actors .uml caption="See this!!!"}
+    @startuml
+    Alice -> Bob: Authentication Request
+    Bob --> Alice: Authentication Response
+
+    Alice -> Bob: Another authentication Request
+    Alice <-- Bob: another authentication Response
+    @enduml
+    ```
+
+and then call `pandoc` with `--filter=pandoc-plantuml-diagrams`.
+
 

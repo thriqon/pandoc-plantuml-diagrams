@@ -5,7 +5,7 @@ description:         PlantUML renders different types of UML diagrams.
                      This filter invokes plantuml.jar (which must be present
                      in the current directory) for any yet unrendered diagrams.
                      .
-                     Diagrams are recognized in CodeBlocks that have exactly the
+                     Diagrams are recognized in CodeBlocks that have the
                      class "uml". It is advisable to also include an attribute
                      "caption", which is rendered as alternate text for the image.
                      If an ID is present, it is additionally appended compatible
