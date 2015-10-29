@@ -1,6 +1,15 @@
 
--- | Module : Text.Pandoc.PlantUML.Filter.FileNameGenerator
--- Generate a filename only depending on the contents of it.
+-- |
+-- Module          : Text.Pandoc.PlantUML.Filter.FileNameGenerator
+-- Description     : Generate a filename only depending on the contents of it.
+-- Copyright       : (c) Jonas Weber, 2015
+-- License         : ISC
+--
+-- This package does its best to avoid rerendering the same diagrams (as in, with
+-- the same source) if not neccessary. It uses a cryptographic hash (namely SHA1)
+-- to get a stable identifier for the contents.
+--
+--
 module Text.Pandoc.PlantUML.Filter.FileNameGenerator(fileNameForSource) where
 
 import Data.Digest.Pure.SHA (sha1, showDigest)

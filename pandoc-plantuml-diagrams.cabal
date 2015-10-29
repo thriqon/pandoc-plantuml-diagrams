@@ -1,5 +1,5 @@
 name:                pandoc-plantuml-diagrams
-version:             0.1.0.0
+version:             0.1.0.2
 synopsis:            Render and insert PlantUML diagrams with Pandoc
 description:         PlantUML renders different types of UML diagrams.
                      This filter invokes plantuml.jar (which must be present
@@ -21,7 +21,7 @@ cabal-version:       >=1.10
 library
   Exposed-modules:     Text.Pandoc.PlantUML.Filter
                      , Text.Pandoc.PlantUML.Filter.IORender
-  other-modules:       Text.Pandoc.PlantUML.Filter.Types
+                     , Text.Pandoc.PlantUML.Filter.Types
                      , Text.Pandoc.PlantUML.Filter.FileNameGenerator
                      , Text.Pandoc.PlantUML.Filter.Formats
                      , Text.Pandoc.PlantUML.Filter.OutputBlock

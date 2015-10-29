@@ -1,6 +1,10 @@
 
--- | Module: Text.Pandoc.PlantUML.Filter.Types
--- Defines the common types used in this package
+-- |
+-- Module          : Text.Pandoc.PlantUML.Filter.Types
+-- Description     : Defines the common types used in this package
+-- Copyright       : (c) Jonas Weber, 2015
+-- License         : ISC
+--
 module Text.Pandoc.PlantUML.Filter.Types where
 
 -- | The name of an image, without extension, usually a hash
@@ -23,10 +27,10 @@ instance Show ImageFileName where
   show (ImageFileName name format) = name ++ "." ++ format
 
 -- | External impure actions are encapsulated in this monad.
--- doesImageExist tells whether an image with the given file name
--- is already present in the store (e.g., the filesystem).
--- renderImage calls out to an external diagram processor (PlantUML)
--- to render the source to the given image file name.
 class Monad m => ImageIO m where
+  -- | Tells whether an image with the given file name
+  -- is already present in the store (e.g., the filesystem).
   doesImageExist     :: ImageFileName -> m Bool
+  -- | Calls out to an external diagram processor (PlantUML)
+  -- to render the source to the given image file name.
   renderImage        :: ImageFileName -> DiagramSource -> m ()
