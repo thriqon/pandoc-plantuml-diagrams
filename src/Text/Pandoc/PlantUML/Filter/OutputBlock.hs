@@ -19,7 +19,7 @@ resultBlock :: ImageFileName -> Attr -> Block
 resultBlock imageFileName attr = Para $ map (\p -> p imageFileName attr) [imageTag, idTag]
 
 imageTag :: ImageFileName -> Attr -> Inline
-imageTag imageFileName attr    = Image (altTagInline attr) ((show imageFileName), "fig:")
+imageTag imageFileName attr    = Image nullAttr (altTagInline attr) ((show imageFileName), "fig:")
 
 idTag :: ImageFileName -> Attr -> Inline
 idTag _ (id, _, _)             = Str ("{#" ++ id ++ "}")

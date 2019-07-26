@@ -14,7 +14,7 @@ spec = do
     it "renders into a Paragraph containing an Image" $ do
       let b = resultBlock (ImageFileName "asd" "png") ("id", [], [])
       case b of
-        Para [(Image _ (src, _)), _ ]   -> do
+        Para [(Image nullAttr _ (src, _)), _ ]   -> do
           src `shouldBe` "asd.png"
         otherwise                -> expectationFailure "should be an image in a paragraph"
     it "renders into a Paragraph containing an ID tag" $ do
