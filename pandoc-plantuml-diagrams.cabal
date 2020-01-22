@@ -1,5 +1,5 @@
 name:                pandoc-plantuml-diagrams
-version:             0.1.0.3
+version:             0.1.0.4
 synopsis:            Render and insert PlantUML diagrams with Pandoc
 description:         PlantUML renders different types of UML diagrams.
                      This filter invokes plantuml.jar (which must be present
@@ -47,6 +47,17 @@ Test-Suite test-pandoc-crossref
   Main-Is:             Spec.hs
   hs-source-dirs:      test, src
   default-language:    Haskell2010
+  other-modules:       Text.Pandoc.PlantUML.Filter
+                     , Text.Pandoc.PlantUML.Filter.IORender
+                     , Text.Pandoc.PlantUML.Filter.Types
+                     , Text.Pandoc.PlantUML.Filter.FileNameGenerator
+                     , Text.Pandoc.PlantUML.Filter.Formats
+                     , Text.Pandoc.PlantUML.Filter.OutputBlock
+                     , Text.Pandoc.PlantUML.Filter.FileNameGeneratorSpec
+                     , Text.Pandoc.PlantUML.Filter.FormatsSpec
+                     , Text.Pandoc.PlantUML.Filter.OutputBlockSpec
+                     , Text.Pandoc.PlantUML.Filter.TypesSpec
+                     , Text.Pandoc.PlantUML.FilterSpec
   Build-depends:       hspec
                      , hspec-discover
                      , base >= 4 && < 5
@@ -54,6 +65,9 @@ Test-Suite test-pandoc-crossref
                      , pandoc-types
                      , SHA
                      , utf8-string
+                     , bytestring
+                     , process
+                     , directory
 
 source-repository head
   type:                git
