@@ -1,4 +1,4 @@
-
+{-# LANGUAGE BangPatterns #-}
 -- | Module: Text.Pandoc.PlantUML.Filter.Render
 -- Defines the actual rendering done with PlantUML
 module Text.Pandoc.PlantUML.Filter.IORender() where
@@ -26,6 +26,6 @@ plantUmlProcess (ImageFileName _ fileType) = (proc "java" ["-jar", "plantuml.jar
 
 pipe :: Handle -> Handle -> IO ()
 pipe hIn hOut = do
-  input <- hGetContents hIn
+  !input <- hGetContents hIn
   hPut hOut input
 
