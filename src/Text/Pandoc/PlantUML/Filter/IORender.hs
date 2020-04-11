@@ -1,9 +1,12 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE OverloadedStrings #-}
 -- | Module: Text.Pandoc.PlantUML.Filter.Render
 -- Defines the actual rendering done with PlantUML
 module Text.Pandoc.PlantUML.Filter.IORender() where
 
-import System.IO (hClose, hPutStr, IOMode(..), withBinaryFile, Handle)
+import System.IO (hClose, IOMode(..), withBinaryFile, Handle)
+import Data.Text.IO (hPutStr)
+import qualified Data.Text as T
 import Data.ByteString.Lazy (hGetContents, hPut)
 import System.Process
 import System.Directory
@@ -21,7 +24,7 @@ instance ImageIO IO where
   doesImageExist imageFileName = doesFileExist $ show imageFileName
 
 plantUmlProcess :: ImageFileName -> CreateProcess
-plantUmlProcess (ImageFileName _ fileType) = (proc "java" ["-jar", "plantuml.jar", "-pipe", "-t" ++ fileType])
+plantUmlProcess (ImageFileName _ fileType) = (proc "java" ["-jar", "plantuml.jar", "-pipe", "-t" ++ (T.unpack fileType)])
   { std_in = CreatePipe, std_out = CreatePipe }
 
 pipe :: Handle -> Handle -> IO ()
