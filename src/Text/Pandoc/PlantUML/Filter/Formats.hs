@@ -1,4 +1,4 @@
-
+{-# LANGUAGE OverloadedStrings #-}
 -- | Module : Text.Pandoc.PlantUML.Filter.Formats
 -- Determines the image type to be used for one particular
 -- pandoc output format.

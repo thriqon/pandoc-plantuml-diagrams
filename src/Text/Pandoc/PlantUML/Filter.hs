@@ -1,4 +1,4 @@
-
+{-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module    : Text.Pandoc.PlantUML.Filter
 --
