@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 
 -- | Module : Text.Pandoc.PlantUML.Filter.Formats
 -- Determines the image type to be used for one particular
@@ -10,6 +11,7 @@ module Text.Pandoc.PlantUML.Filter.Formats(imageFormatTypeFor) where
 
 import Text.Pandoc.Definition
 import Text.Pandoc.PlantUML.Filter.Types
+import qualified Data.Text as T
 
 -- | The image file type to be used for the given output format.
 -- EPS is used for latex outputs, as it provides lossless scalability
