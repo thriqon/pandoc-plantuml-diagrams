@@ -1,15 +1,16 @@
-
+{-# LANGUAGE OverloadedStrings #-}
 
 module Text.Pandoc.PlantUML.Filter.FormatsSpec where
 
 import Test.Hspec
 import Text.Pandoc.Definition
 import Text.Pandoc.PlantUML.Filter.Formats
+import Data.Text
 
-formatFor :: String -> String
+formatFor :: Text -> Text
 formatFor = imageFormatTypeFor . Format
 
-shouldBeFormattedAs :: String -> String -> Expectation
+shouldBeFormattedAs :: Text -> Text -> Expectation
 shouldBeFormattedAs docFormat imageFormat = (imageFormatTypeFor (Format docFormat)) `shouldBe` imageFormat
 
 spec :: Spec

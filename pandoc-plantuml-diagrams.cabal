@@ -69,6 +69,7 @@ Test-Suite test-pandoc-crossref
                      , bytestring
                      , process
                      , directory
+                     , text
 
 source-repository head
   type:                git
