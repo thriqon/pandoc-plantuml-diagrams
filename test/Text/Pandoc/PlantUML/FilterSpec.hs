@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Text.Pandoc.PlantUML.FilterSpec where
 
@@ -9,6 +10,7 @@ import Text.Pandoc.PlantUML.Filter.Types
 import Text.Pandoc.PlantUML.Filter.FileNameGenerator
 import Text.Pandoc.PlantUML.Filter
 import Control.Monad.State.Lazy as S
+import Data.Text
 
 type FakeImageIO = S.State WorldInfo
 
@@ -32,7 +34,7 @@ instance ImageIO (S.State WorldInfo) where
     S.put st { renderedImages = ((show fileName), source) : oldImages}
 
 
-runProcessingIn :: WorldInfo -> String -> Block -> (Block, WorldInfo)
+runProcessingIn :: WorldInfo -> Text -> Block -> (Block, WorldInfo)
 runProcessingIn wi format block = S.runState (processBlocks (Just (Format format)) block) wi
 
 

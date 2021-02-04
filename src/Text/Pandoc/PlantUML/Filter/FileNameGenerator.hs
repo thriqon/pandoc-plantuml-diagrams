@@ -14,13 +14,15 @@ module Text.Pandoc.PlantUML.Filter.FileNameGenerator(fileNameForSource) where
 
 import Data.Digest.Pure.SHA (sha1, showDigest)
 import Data.ByteString.Lazy.UTF8 (fromString)
+import qualified Data.Text as T
 
 import Text.Pandoc.PlantUML.Filter.Types
 
 -- | Generates the Hash of a diagram source, and prefixes that.
 fileNameForSource :: DiagramSource -> ImageName
 fileNameForSource (DiagramSource source) = prefix ++ (hash source)
-  where hash = showDigest . sha1 . fromString
+  where
+    hash = showDigest . sha1 . fromString . T.unpack
 
 -- | The prefix to put before rendered images
 prefix :: String

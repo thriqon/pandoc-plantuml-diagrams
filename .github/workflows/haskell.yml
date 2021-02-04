@@ -1,0 +1,24 @@
+on:
+- push
+name: build
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: stack test
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2.1.4
+        with:
+          path: |
+            ~/.stack
+            .stack-work/
+          key: ${{hashFiles('stack.yaml', 'stack.yaml.lock', 'pandoc-plantuml-diagrams.cabal')}}
+      - name: Setup Haskell
+        uses: haskell/actions/setup@v1
+        with:
+          enable-stack: true
+      - run: stack --no-terminal --install-ghc test --only-dependencies
+      - run: stack --no-terminal test --haddock --no-haddock-deps

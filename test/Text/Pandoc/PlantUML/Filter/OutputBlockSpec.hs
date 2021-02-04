@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 
 module Text.Pandoc.PlantUML.Filter.OutputBlockSpec where
 

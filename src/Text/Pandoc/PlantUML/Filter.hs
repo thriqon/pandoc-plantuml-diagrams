@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module    : Text.Pandoc.PlantUML.Filter
@@ -8,6 +9,7 @@ module Text.Pandoc.PlantUML.Filter (processBlocks) where
 
 import Text.Pandoc.JSON
 import Control.Monad
+import qualified Data.Text as T
 
 import Text.Pandoc.PlantUML.Filter.Types
 import Text.Pandoc.PlantUML.Filter.FileNameGenerator

@@ -1,4 +1,4 @@
-
+{-# LANGUAGE OverloadedStrings #-}
 
 module Text.Pandoc.PlantUML.Filter.FileNameGeneratorSpec where
 
