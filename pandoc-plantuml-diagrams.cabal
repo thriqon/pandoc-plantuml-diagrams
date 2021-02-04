@@ -1,5 +1,5 @@
 name:                pandoc-plantuml-diagrams
-version:             0.1.0.4
+version:             0.1.1.0
 synopsis:            Render and insert PlantUML diagrams with Pandoc
 description:         PlantUML renders different types of UML diagrams.
                      This filter invokes plantuml.jar (which must be present
